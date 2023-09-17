@@ -92,10 +92,20 @@ ISR(INT2_vect){
 }
 
 void timer1(){
+	/*  Description :
+		 * 	TCCR1A -  :
+		 * 		Using Channel A in TIM1 ,  Bit 3 – FOC1A: =1
+		 * 	TCCR1B :
+		 * 		WGM12 =1 -  Mode 4 CTC OCR1A
+		 * 		CS10,CS12 =1  - clkI/O/1024 (From prescaler)
+		 * 	OCR1A -Output Compare Register 1 A : =977
+		 * 	TIMSK  Timer/Counter Interrupt Mask Register:
+		 * 		OCIE1A =977
+		 */
 	TCCR1A = (1<<FOC1A);							// NO PWM
-	TCCR1B = (1 << WGM12) | (1 << CS12); 	//CTC MODE, PRESCALE = 64
+	TCCR1B = (1 << WGM12)|(1 << CS10) | (1 << CS12); 	//CTC MODE, PRESCALE = 1024
 	TCNT1 = 0;
-	OCR1A = 3905;
+	OCR1A = 977;
 	TIMSK |= (1<<OCIE1A);	// Output Compare A Match Interrupt Enable
 
 }
