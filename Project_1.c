@@ -75,7 +75,7 @@ ISR(INT0_vect){
 	TCNT1 = 0;
 	if(!(TCCR1A)){
 		TCCR1A = (1<<FOC1A);
-		TCCR1B = (1<<WGM12) | (1<<CS11) | (1<<CS10);
+		TCCR1B = (1<<WGM12) | (1<<CS12) | (1<<CS10);
 	}
 }
 
@@ -88,7 +88,7 @@ ISR(INT1_vect){
 ISR(INT2_vect){
 	// resume the timer
 	TCCR1A = (1<<FOC1A);
-	TCCR1B = (1<<WGM12) | (1<<CS11) | (1<<CS10);
+	TCCR1B = (1<<WGM12) | (1<<CS12) | (1<<CS10);
 }
 
 void timer1(){
